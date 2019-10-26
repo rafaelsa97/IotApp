@@ -1,0 +1,14 @@
+{
+  "name": "testbench",
+  "version": "1.0.0",
+  "description": "Bancada de testes para testar bibliotecas, frameworks, etc, etc, etc",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rafael Santos de Almeida",
+  "license": "ISC",
+  "dependencies": {
+    "cat-me": "^1.0.3"
+  }
+}

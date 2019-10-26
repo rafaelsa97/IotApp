@@ -1,0 +1,23 @@
+{
+  "name": "iotapp",
+  "version": "1.0.0",
+  "description": "Projeto de front-end e back-end de aplicação para o PFC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafaelsa97/IotApp.git"
+  },
+  "author": "Rafael Santos de Almeida (rafaelsa97@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafaelsa97/IotApp/issues"
+  },
+  "homepage": "https://github.com/rafaelsa97/IotApp#readme",
+  "dependencies": {
+    "cat-me": "^1.0.3",
+    "express": "^4.17.1"
+  }
+}
