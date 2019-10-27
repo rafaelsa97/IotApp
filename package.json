@@ -18,6 +18,7 @@
   "homepage": "https://github.com/rafaelsa97/IotApp#readme",
   "dependencies": {
     "cat-me": "^1.0.3",
+    "ejs": "^2.7.1",
     "express": "^4.17.1"
   }
 }

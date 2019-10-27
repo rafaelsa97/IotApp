@@ -1,11 +1,11 @@
-const express = require("express");
-const app     = express();
+const app = require("express")();
+const request = require("request");
 
 RotasSimples: {
 // "/"    => "Hi there!"
 app.get("/",function(req,res)
 {
-    res.send("Hi there!");
+    res.render("home.ejs");
 });
 
 // "/bye" => "Goodbye!"
@@ -35,7 +35,12 @@ RotaDefault: {
     });
 }
 
-// Runs the server and makes it listen to port 3000
-app.listen(3000,function(){
-    console.log("Listening on port 3000")
+request('https://itunes.apple.com/search?term=beatles&entity=song', function (error, response, body) {
+  var parsed = JSON.parse(body);
+  console.log(parsed["resultCount"]); // Print the HTML for the Google homepage.
 });
+
+// Runs the server and makes it listen to port 3000
+// app.listen(3000,function(){
+//     console.log("Listening on port 3000")
+// });
