@@ -4,12 +4,14 @@ const path    = require('path');
 
 let viewPath = __dirname + "/FrontEnd/TaesaAPI/"; // Taesa API path on project
 
-RotasSimples: {
+Rotas: {
     app.get("/",function(req,res)
     {
         res.sendFile(path.join(viewPath + 'index.html')); // Send index page to browser
     });
-    app.use(express.urlencoded());
+
+    app.use(express.urlencoded()); // Gets the submit parameter from POST request
+
     app.post('/', (req, res) => {
         switch(req.body.Asset){
             case "Linhas":
