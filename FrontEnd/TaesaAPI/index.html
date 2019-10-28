@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Get ArcGIS Server Map Service Layer Field Names</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.29/esri/css/esri.css">
+  <style>
+    body{
+      font-family: "Arial Unicode MS, Arial, sans-serif";
+    }
+    #content {
+      width: 800px; height: 100px; padding: 5px; overflow: auto;
+      border: solid 2px #AAAAAA; background-color: #FFFFFF;
+      -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
+      -moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
+    }
+	#json {
+      width: 800px; height: 350px; padding: 5px; overflow: auto;
+      border: solid 2px #AAAAAA; background-color: #FFFFFF;
+      -moz-border-radius: 5px; -webkit-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px;
+      -moz-box-shadow: 0 0 0.5em black; -webkit-box-shadow: 0 0 0.5em black; -o-box-shadow: 0 0 0.5em black; box-shadow: 0 0 0.5em black;
+    }
+    .failure { color: red; }
+    #status { font-size: 12px; }
+  </style>
+  
+  <script src="https://js.arcgis.com/3.29/"></script>
+  <script>
+    require(["dojo/dom", "dojo/on", "dojo/dom-class", "dojo/_base/json", "dojo/_base/array", "dojo/string", "esri/request", "dojo/domReady!"], 
+	function(dom, on, domClass, dojoJson, array, dojoString, esriRequest) {
+
+        dom.byId("json").value = "";
+        dom.byId("content").value = "";
+        //handle the Go button's click event
+        on(dom.byId("submitRequest"), "click", getContent);
+		    on(dom.byId("seeDetails"), "click", goToMap);
+		
+		function goToMap(){
+			var currentSelection = dom.byId("url").selectedIndex;
+		
+		    switch(currentSelection) {
+				case 0:
+					window.open("lines.html");
+					break;
+				case 1:
+					window.open("towers.html");					
+					break;
+				case 2:				
+					window.open("subestations.html");
+					break;				
+				default:
+					
+			}
+		
+		}
+
+        function getContent(){
+
+          var contentDiv = dom.byId("content");
+          contentDiv.value = "";
+          domClass.remove(contentDiv, "falha");
+          dom.byId("status").innerHTML = "Efetuando o download...";
+
+          //get the url and setup a proxy 
+          var url = dom.byId("url").value;
+
+
+          if(url.length === 0){
+            alert("Forneça a URL");
+            return;
+          }
+
+          var requestHandle = esriRequest({
+            "url": url,
+            "content": {
+              "f": "json"			  
+            },
+            "callbackParamName": "callback"
+          });
+          requestHandle.then(requestSucceeded, requestFailed);
+        }
+
+        function requestSucceeded(response, io){
+          var fieldInfo, pad;
+          pad = dojoString.pad;
+			
+          //toJson converts the given JavaScript object
+          //and its properties and values into simple text 
+          dojoJson.toJsonIndentStr = "  ";
+          console.log("resposta como texto:\n", dojoJson.toJson(response, true));
+
+          dom.byId("status").innerHTML = "";
+		  dom.byId("json").value = dojoJson.toJson(response, true);
+
+          //show field names and aliases
+          if ( response.hasOwnProperty("fields") ) {
+            console.log("Buscando os campos...");
+            fieldInfo = array.map(response.fields, function(f) {
+              return pad("Campo:", 8, " ", true) + pad(f.name, 25, " ", true) + 
+                pad("Alias:", 8, " ", true) + pad(f.alias, 25, " ", true) + 
+                pad("Tipo:", 8, " ", true) + pad(f.type, 25, " ", true);
+            });
+            dom.byId("content").value = fieldInfo.join("\n");
+			
+          } else {
+            dom.byId("content").value = "Nenhum campo encontrado. Verifique a URL fornecida.";
+          }
+
+        }
+        function requestFailed(error, io){
+
+          domClass.add(dom.byId("content"), "erro");
+          
+          dojoJson.toJsonIndentStr = " ";
+          dom.byId("content").value = dojoJson.toJson(error, true);
+
+        }
+
+
+    });
+  </script>
+
+</head>
+<body>
+<h2>Projeto de P&D Concert/Taesa - 527/16</h2>
+  <p>
+	  <form>
+	  <div>
+		  <h3>Selecione os ativos:</h3>
+		  <select id="url">
+			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/0">Linhas</option>
+			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/1">Torres</option>
+			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/2">Subestações</option>
+		  </select>
+		  <button id="submitRequest" type="button" value="GO">Especificação</button>
+		  <input type="button" id="seeDetails" value='Mapa'>
+	  </div>
+	</form>
+    <span id="status"></span>
+  </p>
+  <h3>Campos</h3>
+  <textarea id="content"></textarea>
+  <h3>Json</h3>
+  <textarea id="json"></textarea>
+</body>
+</html>
