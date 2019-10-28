@@ -61,9 +61,21 @@
           domClass.remove(contentDiv, "falha");
           dom.byId("status").innerHTML = "Efetuando o download...";
 
-          //get the url and setup a proxy 
-          var url = dom.byId("url").value;
+          //get the url and setup a proxy
+          debugger;
+          var url = dom.byId("Asset").value;
 
+          switch(url) {
+				    case "Linhas":
+				    	url = "https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/0";
+				    	break;
+				    case "Torres":
+              url = "https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/1";					
+				    	break;
+				    case "Subestações":				
+              url = "https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/2";	
+				    	break;
+					}
 
           if(url.length === 0){
             alert("Forneça a URL");
@@ -124,18 +136,16 @@
 <body>
 <h2>Projeto de P&D Concert/Taesa - 527/16</h2>
   <p>
-	  <form>
-	  <div>
+	  <form method="POST" action="/">
 		  <h3>Selecione os ativos:</h3>
-		  <select id="url">
-			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/0">Linhas</option>
-			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/1">Torres</option>
-			<option value="https://sig.taesa.com.br/arcgis/rest/services/geotaesa/PeD_TAESA/FeatureServer/2">Subestações</option>
-		  </select>
-		  <button id="submitRequest" type="button" value="GO">Especificação</button>
-		  <input type="button" id="seeDetails" value='Mapa'>
-	  </div>
-	</form>
+        <select name="Asset" id="Asset">
+          <option value="Linhas">Linhas</option>
+          <option value="Torres">Torres</option>
+          <option value="Subestações">Subestações</option>
+        </select>
+        <input type="submit" name="register" value='Mapa'>
+        <button id="submitRequest" type="button" value="GO">Especificação</button>
+    </form>
     <span id="status"></span>
   </p>
   <h3>Campos</h3>
