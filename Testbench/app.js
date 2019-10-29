@@ -1,46 +1,63 @@
-const app = require("express")();
-const request = require("request");
+// const express = require("express");
+// const mysql   = require("mysql");
+// const app     = express();
 
-RotasSimples: {
-// "/"    => "Hi there!"
-app.get("/",function(req,res)
-{
-    res.render("home.ejs");
-});
-
-// "/bye" => "Goodbye!"
-app.get("/bye",function(req,res)
-{
-    res.send("Goodbye!")
-});
-
-// "/dog" => "MEOW"
-app.get("/dog",function(req,res)
-{
-    res.send("Goodbye!")
-});
-
-// params
-app.get("/:param",function(req,res)
-{
-    console.log("Parâmetro = " + req.params.param);
-    res.send("Goodbye!")
-});
-}
-
-RotaDefault: {
-    app.get("*",function(req,res)
-    {
-        res.send("Você chegou a lugar nenhum")
-    });
-}
-
-request('https://itunes.apple.com/search?term=beatles&entity=song', function (error, response, body) {
-  var parsed = JSON.parse(body);
-  console.log(parsed["resultCount"]); // Print the HTML for the Google homepage.
-});
-
-// Runs the server and makes it listen to port 3000
-// app.listen(3000,function(){
-//     console.log("Listening on port 3000")
+// //Create connection
+// const db = mysql.createConnection({
+//     host:     'localhost',
+//     user:     'root',
+//     password: '123456'
+//     //database: 'nodemysql'
 // });
+
+// // Connect
+// db.connect( function(err) {
+//     if(err){
+//         console.log("Failed to connect to data base: " + err);
+//         throw err;
+//     }
+//     console.log("Mysql connected!");
+// });
+
+// // Create Data Base
+// app.get("/createdb", (req,res) =>{
+//     let sql = 'CREATE DATABASE nodemysql';
+//     db.query(sql, function(err,result){
+//         if(err){
+//             throw err;
+//         }
+//         else{
+//             res.send('database created!');
+//             console.log(result);
+//         }
+//     });
+// });
+
+// // Start server
+// app.listen(3306,() => {
+//     console.log("Server listening to port 3306.");
+// });
+
+
+var mysql      = require('mysql');
+var connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'pfctaesa'
+});
+ 
+connection.connect((err) =>{
+  if(err){
+    throw err;
+  }
+  else{
+    console.log("Connected to database!!!");
+  }
+});
+ 
+connection.query('SELECT * FROM pfc.queimadas', function (error, results, fields) {
+  if (error) throw error;
+  console.log('The solution is: ', results[0].solution);
+});
+ 
+connection.end();
