@@ -102,7 +102,7 @@
           console.log("resposta como texto:\n", dojoJson.toJson(response, true));
 
           dom.byId("status").innerHTML = "";
-		  dom.byId("json").value = dojoJson.toJson(response, true);
+		      dom.byId("json").value = dojoJson.toJson(response, true);
 
           //show field names and aliases
           if ( response.hasOwnProperty("fields") ) {
@@ -136,7 +136,7 @@
 <body>
 <h2>Projeto de P&D Concert/Taesa - 527/16</h2>
   <p>
-	  <form method="POST" action="/">
+	  <form method="POST" action="/taesa_api/map">
 		  <h3>Selecione os ativos:</h3>
         <select name="Asset" id="Asset">
           <option value="Linhas">Linhas</option>
