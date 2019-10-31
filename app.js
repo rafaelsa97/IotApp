@@ -28,7 +28,8 @@ API_Taesa: {
 }
 
 usualRouting: {
-    app.use('/bootstrap', express.static(__dirname + '\\node_modules\\bootstrap\\dist')); // Set the css path
+    app.use('/bootstrap', express.static(__dirname + '\\node_modules\\bootstrap\\dist')); // Set the bootstrap path
+    app.use('/css', express.static(__dirname + '\\Frontend\\Resources\\css')); // Set the bootstrap path
 
     app.get("/",function(req,res)
     {

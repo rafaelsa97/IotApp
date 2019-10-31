@@ -1,0 +1,15 @@
+html,body {
+  height: 100%;
+  margin: 0
+}
+
+#mapid {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    flex: 1 1 auto;
+}
+
+.defaultHeader {
+    flex: 0 1 auto;
+}
