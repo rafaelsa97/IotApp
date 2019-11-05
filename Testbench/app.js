@@ -6,6 +6,7 @@ let viewPath = __dirname + "/FrontEnd/"; // Taesa API path on project
 
 usualRouting: {
     app.use('/css', express.static(__dirname + '\\Frontend\\Resources\\css')); // Set the bootstrap path
+    app.use('/js', express.static(__dirname + '\\Frontend\\Resources\\Javascript')); // Set the bootstrap path
 
     app.get("/",function(req,res)
     {
