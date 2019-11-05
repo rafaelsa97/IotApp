@@ -38,6 +38,6 @@ usualRouting: {
 }
 
 //Runs the server and makes it listen to port 3000
-app.listen(3000,function(){
+app.listen(process.env.PORT,function(){
     console.log("Listening on port 3000!");
 });
