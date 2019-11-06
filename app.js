@@ -1,6 +1,8 @@
 const express = require("express");
+const dotenv  = require("dotenv");
+const path    = require("path");
 const app     = express();
-const path    = require('path');
+dotenv.config(); // Load all environmental variables
 
 let viewPath = __dirname + "/FrontEnd/"; // Taesa API path on project
 
@@ -28,8 +30,8 @@ API_Taesa: {
 }
 
 usualRouting: {
-    app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist')); // Set the bootstrap path
-    app.use('/css', express.static(__dirname + '/Frontend/Resources/css')); // Set the bootstrap path
+    app.use('/bootstrap', express.static(__dirname + process.env.BOOTSTRAP_PATH)); // Set the bootstrap path
+    app.use('/css', express.static(__dirname + process.env.CSS_PATH)); // Set the bootstrap path
 
     app.get("/",function(req,res)
     {
@@ -39,5 +41,5 @@ usualRouting: {
 
 //Runs the server and makes it listen to port 3000
 app.listen(process.env.PORT,function(){
-    console.log("Listening on port 3000!");
+    console.log("Listening on port " + process.env.PORT);
 });
