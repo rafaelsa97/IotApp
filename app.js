@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv  = require("dotenv");
 const path    = require("path");
+const environmentalVariables = require('./Config/index.js');
 const app     = express();
 dotenv.config(); // Load all environmental variables
 
@@ -30,8 +31,8 @@ API_Taesa: {
 }
 
 usualRouting: {
-    app.use('/bootstrap', express.static(__dirname + process.env.BOOTSTRAP_PATH)); // Set the bootstrap path
-    app.use('/css', express.static(__dirname + process.env.CSS_PATH)); // Set the bootstrap path
+    app.use('/bootstrap', express.static(__dirname + environmentalVariables.default.bootstrap)); // Set the bootstrap path
+    app.use('/css', express.static(__dirname + environmentalVariables.default.css)); // Set the bootstrap path
 
     app.get("/",function(req,res)
     {
@@ -40,6 +41,6 @@ usualRouting: {
 }
 
 //Runs the server and makes it listen to port 3000
-app.listen(process.env.PORT,function(){
-    console.log("Listening on port " + process.env.PORT);
+app.listen(environmentalVariables.default.port,function(){
+    console.log("Listening on port " + environmentalVariables.default.port);
 });
