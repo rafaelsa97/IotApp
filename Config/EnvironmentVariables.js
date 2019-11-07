@@ -3,7 +3,5 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 exports.default = {
-    port     : process.env.PORT,
-    bootstrap: process.env.BOOTSTRAP_PATH,
-    css      : process.env.CSS_PATH
+    port: process.env.PORT
 };
