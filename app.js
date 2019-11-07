@@ -1,6 +1,6 @@
 const environmentalVariables = require('./Config/EnvironmentVariables.js');
 const loadPakcages           = require('./BackEnd/Loaders/PackageLoader.js');
-const loadRoutes             = require('./BackEnd/Routes.js');
+const loadRoutes             = require('./BackEnd/APIs/Routes.js');
 const express                = require("express");
 const app                    = express();
 
