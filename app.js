@@ -1,5 +1,6 @@
 const environmentalVariables = require('./Config/EnvironmentVariables.js');
 const loadPakcages           = require('./BackEnd/Loaders/PackageLoader.js');
+const connectDatabase        = require('./BackEnd/Loaders/DatabaseLoader.js');
 const loadRoutes             = require('./BackEnd/APIs/Routes.js');
 const express                = require("express");
 const app                    = express();
@@ -7,6 +8,7 @@ const app                    = express();
 let viewPath = __dirname + "/FrontEnd/"; // Taesa API path on project
 loadPakcages(app,viewPath);
 loadRoutes(app,viewPath);
+var db = connectDatabase();
 
 //Runs the server and makes it listen to port 3000
 app.listen(environmentalVariables.default.port,function(){

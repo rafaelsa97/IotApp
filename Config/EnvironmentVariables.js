@@ -3,5 +3,10 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 exports.default = {
-    port: process.env.PORT
+    port: process.env.PORT,
+    database: {
+        databaseName: process.env.DATABASE_NAME,
+        user        : process.env.DATABASE_USER,
+        password    : process.env.DATABASE_PASSWORD
+    }
 };
