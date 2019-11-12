@@ -1,9 +1,20 @@
-const path = require("path");
-
-module.exports = function loadRoutes(app,viewPath){
+const path     = require("path");
+const mysql    = require('../Database/mySqlConnection.js');
+/**
+ * * Teste
+ * ? Teste
+ */
+module.exports = function loadRoutes(app,viewPath,db){
     // Usual routes
     app.get("/",function(req,res)
     {
+        mysql.getConnection(function(err, mclient) {
+            console.log("Chegamos até aqui");
+            mclient.query("SELECT * FROM raios", function (err, result, fields) {
+                if (err) throw err;
+                console.log(result);
+              });
+        });
         res.sendFile(path.join(viewPath + 'index.html')); // Send index page to browser
     });
 

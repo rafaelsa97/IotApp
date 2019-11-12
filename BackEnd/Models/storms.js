@@ -1,5 +1,3 @@
-import { ENGINE_METHOD_STORE } from "constants";
-
 export default class Storms{
     constructor(id,eventDate,latitude,longitude,peakCurrent,higherSemiAxis,lowerSemiAxis,azimuth){
         this.id             = id;
