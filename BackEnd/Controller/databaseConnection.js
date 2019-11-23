@@ -17,9 +17,9 @@ const mysql = new Sequelize(envVariables.default.database.databaseName, envVaria
 );
 
 mysql.authenticate().then(() => {
-    console.log("Database connectes successfuly!");
+    console.log("Database connected successfuly!");
 }).catch((err) => {
-    console.log("Error on datbase connection.\n" + err);
+    console.log("Error on database connection.\n" + err);
 });
 
 module.exports = mysql;
