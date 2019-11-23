@@ -1,7 +1,7 @@
-const path = require("path");
-const Sequelize = require('sequelize');
-const db = require('..//Controller/databaseConnection');
-const User = require('../Models/UsersVO');
+const path              = require("path");
+const Sequelize         = require('sequelize');
+const db                = require('..//Controller/databaseConnection');
+const ElectricDischarge = require('../Models/ElectricDischarge');
 /**
  * * Teste
  * ? Teste
@@ -16,15 +16,17 @@ module.exports = function loadRoutes(app, viewPath) {
     });
 
     /**
-     * * Lines API
-     * * Loads all line points
+     * * Eletric Discharges API
+     * Loads all electric discharges
+     * ! Data persisted on "raios" database table.
+     * TODO Make a routine to retrieve data from INPE API
      */
-    app.get("/Lines", function (req, res) {
+    app.get("/Discharges", function (req, res) {
         try {
-            User.findAll().then(users => {
-                res.send(JSON.stringify(users, null, 4))
-            }).catch(() =>{
-                console.log("deu pau")
+            ElectricDischarge.findAll().then(discharges => {
+                res.send(JSON.stringify(discharges, null, 4))
+            }).catch((err) =>{
+                reject("Couldn't retrieve Electric Discharges data from database.\n" + err);
             });
         }
         catch (error) {

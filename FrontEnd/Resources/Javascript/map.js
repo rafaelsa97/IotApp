@@ -22,6 +22,9 @@ function loadAssetPoints(){
         console.log(this.responseText)
       }
     };
-    xhttp.open("GET", "Lines", true);
+    xhttp.open("GET", "Discharges", true);
     xhttp.send();
+    /**
+     * TODO use 'fetch' method instead of using 'XMLHttpRequest'
+     */
 }
