@@ -5,18 +5,36 @@ const mysql    = require('../Database/mySqlConnection.js');
  * ? Teste
  */
 module.exports = function loadRoutes(app,viewPath,db){
-    // Usual routes
+    /**
+     * ! USUAL ROUTES
+     */
+
+    /**
+     * * Home page
+     * * This route loads the home page, displaying the map and the line assets
+     */
     app.get("/",function(req,res)
     {
-        mysql.getConnection(function(err, mclient) {
-            console.log("Chegamos até aqui");
-            mclient.query("SELECT * FROM raios", function (err, result, fields) {
-                if (err) throw err;
-                console.log(result);
-              });
-        });
         res.sendFile(path.join(viewPath + 'index.html')); // Send index page to browser
     });
+
+    /**
+     * * Lines API
+     * * Loads all line points
+     */
+    app.get("/Lines",function(req,res){
+        try {
+            let teste = mysql.getConnection(function(err, mclient) {
+                console.log("Chegamos até aqui");
+                return mclient.query("SELECT * FROM raios", function (err, result, fields) {
+                    if (err) throw err;
+                    return result;
+                  });
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    })
 
     // API Taesa
     app.get("/taesa_api",function(req,res)

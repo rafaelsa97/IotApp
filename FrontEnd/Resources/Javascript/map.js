@@ -7,3 +7,21 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmFmYWVsc2E5NyIsImEiOiJjazJkejczamEwNDQyM2huMGN1cWR5bjFpIn0.bU27maqiKHbo6fEm_eor2g'
 }).addTo(mymap);
+
+
+/**
+ * * Load asset points by AJAX request and print them on map
+ *  ! This function is executed during page load
+ * @param None
+ * @return None
+*/
+function loadAssetPoints(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log(this.responseText)
+      }
+    };
+    xhttp.open("GET", "Lines", true);
+    xhttp.send();
+}
