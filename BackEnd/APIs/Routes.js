@@ -1,11 +1,7 @@
-const path              = require("path");
-const Sequelize         = require('sequelize');
-const db                = require('..//Controller/databaseConnection');
-const ElectricDischarge = require('../Models/ElectricDischarge');
-/**
- * * Teste
- * ? Teste
- */
+const path      = require("path");
+const Lines     = require('../Models/LinesModel');
+const Towers    = require('../Models/TowersModel');
+
 module.exports = function loadRoutes(app, viewPath) {
     /**
      * * Home page
@@ -16,23 +12,43 @@ module.exports = function loadRoutes(app, viewPath) {
     });
 
     /**
-     * * Eletric Discharges API
-     * Loads all electric discharges
-     * ! Data persisted on "raios" database table.
-     * TODO Make a routine to retrieve data from INPE API
+     * * Lines API
+     * Loads all transmission lines
+     * ! Data persisted on "linhas" database table.
+     * TODO Make a routine to retrieve data from Taesa API
      */
-    app.get("/Discharges", function (req, res) {
+    app.get("/Lines", function (req, res) {
         try {
-            ElectricDischarge.findAll().then(discharges => {
-                res.send(JSON.stringify(discharges, null, 4))
+            Lines.findAll().then(response => {
+                res.send(JSON.stringify(response))
             }).catch((err) =>{
-                reject("Couldn't retrieve Electric Discharges data from database.\n" + err);
+                reject("Couldn't retrieve Lines data from database.\n" + err);
             });
         }
         catch (error) {
-            console.log("Não foi possível retornar do banco:\n" + error);
+            console.log("Couldn't retrieve Lines data from database:\n" + error);
         }
-    })
+    });
+
+    /**
+     * * Towers API
+     * Loads all towers positioned in transmission lines
+     * ! Data persisted on "torres" database table.
+     * TODO Make a routine to retrieve data from Taesa API
+     */
+    app.get("/Towers", function (req, res) {
+        try {
+            console.log(Towers)
+            Towers.findAll().then(response => {
+                res.send(JSON.stringify(response))
+            }).catch((err) =>{
+                reject("Couldn't retrieve Towers data from database.\n" + err);
+            });
+        }
+        catch (error) {
+            console.log("Couldn't retrieve Lines data from database:\n" + error);
+        }
+    });
 
     // API Taesa
     app.get("/taesa_api", function (req, res) {

@@ -10,21 +10,25 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 
 
 /**
+ * * loadAssetPoints()
  * * Load asset points by AJAX request and print them on map
  *  ! This function is executed during page load
  * @param None
- * @return None
 */
 function loadAssetPoints(){
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText)
-      }
-    };
-    xhttp.open("GET", "Discharges", true);
-    xhttp.send();
-    /**
-     * TODO use 'fetch' method instead of using 'XMLHttpRequest'
-     */
+  fetch("Towers") // Make an API call to get Discharges information
+  .then(res => res.json())
+  .then(data => plotMarker(data))
+  .catch(err => console.log(err));
+}
+
+/**
+ * * plotMarker(object data)
+ * * Plot marker points in the map given a coordinate in the plan
+ * @param data: element object to be plotted
+*/
+function plotMarker(data){
+  data.forEach((element) => {
+    L.marker([element.LATITUDE, element.LONGITUDE]).addTo(mymap);
+  })
 }

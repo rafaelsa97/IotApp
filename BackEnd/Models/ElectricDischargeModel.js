@@ -28,7 +28,7 @@ const ElectricDischarge = db.define('raios', {
     semieixo_maior: {
         type: Sequelize.FLOAT
     },
-    semieixo_mEnor: {
+    semieixo_menor: {
         type: Sequelize.FLOAT
     },
     azimute: {
