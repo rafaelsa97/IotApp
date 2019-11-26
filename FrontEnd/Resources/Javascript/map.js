@@ -35,7 +35,6 @@ function plotMarker(data,mode){
         });
       break;
     case "polyline":
-      debugger;
       let coordinatesArray = [];
       data.forEach(element => coordinatesArray.push([element.LATITUDE,element.LONGITUDE]));
       L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);

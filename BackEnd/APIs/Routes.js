@@ -1,6 +1,8 @@
-const path      = require("path");
-const Lines     = require('../Models/LinesModel');
-const Towers    = require('../Models/TowersModel');
+const path         = require('path');
+const request      = require('request')
+const Lines        = require('../Models/LinesModel');
+const Towers       = require('../Models/TowersModel');
+const envVariables = require('../../Config/EnvironmentVariables');
 
 module.exports = function loadRoutes(app, viewPath) {
     /**
@@ -34,19 +36,27 @@ module.exports = function loadRoutes(app, viewPath) {
      * * Towers API
      * Loads all towers positioned in transmission lines
      * ! Data persisted on "torres" database table.
-     * TODO Make a routine to retrieve data from Taesa API
+     * TODO Cache information for faster calls
+     * TODO Organize arrays by network name
      */
     app.get("/Towers", function (req, res) {
-        try {
-            console.log(Towers)
-            Towers.findAll().then(response => {
-                res.send(JSON.stringify(response))
-            }).catch((err) =>{
-                reject("Couldn't retrieve Towers data from database.\n" + err);
+        try{
+            request(envVariables.default.towersBasicInformation, {}, (err, response, body) => {
+                if (err) { return console.log(err); }
+                let towers = [];
+                let data = JSON.parse(body).features;
+                data.forEach(element => { // Remove unnecessary information from objects
+                    element.attributes.LONGITUDE = element.attributes.coord_x;
+                    element.attributes.LATITUDE = element.attributes.coord_y;
+                    delete element.attributes.coord_x;
+                    delete element.attributes.coord_y;
+                    towers.push(element.attributes);
+                })
+                res.send(JSON.stringify(towers));
             });
         }
-        catch (error) {
-            console.log("Couldn't retrieve Lines data from database:\n" + error);
+        catch(err){
+            console.log(err);
         }
     });
 
