@@ -1,10 +1,11 @@
 const envVariables = require('../../Config/EnvironmentVariables.js');
 const Sequelize = require('sequelize');
+require('dotenv').config();
 
 const mysql = new Sequelize(envVariables.default.database.databaseName, envVariables.default.database.user, envVariables.default.database.password,
     {
         host: "localhost",
-        dialect: "mysql"
+        dialect: "postgres"
     },
     {
         pool: {

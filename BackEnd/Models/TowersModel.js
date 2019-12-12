@@ -5,48 +5,35 @@ const db        = require('../Controller/databaseConnection');
  * * Towers database object
  * * Table: torres
  */
+
 const Towers = db.define('torres', {
     // attributes
-    ID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
-        unique: true
+        primaryKey: true
     },
-    DATA_CRIACAO: {
-        type: Sequelize.DATE
-    },
-    DATA_ATUALIZACAO: {
-        type: Sequelize.DATE
-    },
-    LATITUDE: {
-        type: Sequelize.DOUBLE
-    },
-    LONGITUDE: {
-        type: Sequelize.DOUBLE
-    },
-    ID_CLIENTE: {
-        type: Sequelize.INTEGER
-    },
-    ID_ICONE: {
-        type: Sequelize.INTEGER
-    },
-    NM_TORRE: {
+    ds_linha_transmissao: {
         type: Sequelize.STRING
     },
-    VL_ALTURA: {
-        type: Sequelize.INTEGER
+    ds_subtipo_suporte: {
+        type: Sequelize.STRING
     },
-    ID_REGIONAL: {
-        type: Sequelize.INTEGER
+    coord_x: {
+        type: Sequelize.DOUBLE
     },
-    ID_CONCESSAO: {
-        type: Sequelize.INTEGER
+    coord_y: {
+        type: Sequelize.DOUBLE
     },
-    ID_TIPO_ATIVO: {
-        type: Sequelize.INTEGER
+    sg_local: {
+        type: Sequelize.STRING
+    },
+    nm_equipamento: {
+        type: Sequelize.STRING
     }
 });
+
+Towers.schema("pfc");
 
 db.sync(); // Sync the model to the real database table
 module.exports = Towers;

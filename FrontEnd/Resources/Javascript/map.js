@@ -28,15 +28,16 @@ function loadAssetPoints(){
  * @param mode: select the plot mode (polyline or marker)
 */
 function plotMarker(data,mode){
+  debugger;
   switch (mode){ // Plot a specific geometrical figure according to the desired mode
     case "marker":
         data.forEach((element) => {
-          L.marker([element.LATITUDE, element.LONGITUDE]).addTo(mymap);
+          L.marker([element.coord_y, element.coord_x]).addTo(mymap);
         });
       break;
     case "polyline":
       let coordinatesArray = [];
-      data.forEach(element => coordinatesArray.push([element.LATITUDE,element.LONGITUDE]));
+      data.forEach(element => coordinatesArray.push([element.coord_y,element.coord_x]));
       L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
       break;
   }

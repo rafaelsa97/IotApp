@@ -14,25 +14,6 @@ module.exports = function loadRoutes(app, viewPath) {
     });
 
     /**
-     * * Lines API
-     * Loads all transmission lines
-     * ! Data persisted on "linhas" database table.
-     * TODO Make a routine to retrieve data from Taesa API
-     */
-    app.get("/Lines", function (req, res) {
-        try {
-            Lines.findAll().then(response => {
-                res.send(JSON.stringify(response))
-            }).catch((err) =>{
-                reject("Couldn't retrieve Lines data from database.\n" + err);
-            });
-        }
-        catch (error) {
-            console.log("Couldn't retrieve Lines data from database:\n" + error);
-        }
-    });
-
-    /**
      * * Towers API
      * Loads all towers positioned in transmission lines
      * ! Data persisted on "torres" database table.
@@ -41,18 +22,10 @@ module.exports = function loadRoutes(app, viewPath) {
      */
     app.get("/Towers", function (req, res) {
         try{
-            request(envVariables.default.towersBasicInformation, {}, (err, response, body) => {
-                if (err) { return console.log(err); }
-                let towers = [];
-                let data = JSON.parse(body).features;
-                data.forEach(element => { // Remove unnecessary information from objects
-                    element.attributes.LONGITUDE = element.attributes.coord_x;
-                    element.attributes.LATITUDE = element.attributes.coord_y;
-                    delete element.attributes.coord_x;
-                    delete element.attributes.coord_y;
-                    towers.push(element.attributes);
-                })
-                res.send(JSON.stringify(towers));
+            Towers.findAll().then(response => {
+                res.send(JSON.stringify(response))
+            }).catch((err) =>{
+                reject("Couldn't retrieve Lines data from database.\n" + err);
             });
         }
         catch(err){
