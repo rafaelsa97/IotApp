@@ -28,7 +28,6 @@ function loadAssetPoints(){
  * @param mode: select the plot mode (polyline or marker)
 */
 function plotMarker(data,mode){
-  debugger;
   switch (mode){ // Plot a specific geometrical figure according to the desired mode
     case "marker":
         data.forEach((element) => {
