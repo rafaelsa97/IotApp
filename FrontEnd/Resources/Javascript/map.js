@@ -28,16 +28,34 @@ function loadAssetPoints(){
  * @param mode: select the plot mode (polyline or marker)
 */
 function plotMarker(data,mode){
-  switch (mode){ // Plot a specific geometrical figure according to the desired mode
-    case "marker":
-        data.forEach((element) => {
-          L.marker([element.coord_y, element.coord_x]).addTo(mymap);
-        });
-      break;
-    case "polyline":
-      let coordinatesArray = [];
-      data.forEach(element => coordinatesArray.push([element.coord_y,element.coord_x]));
-      L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
-      break;
-  }
+  data = Object.values(data);
+  data.forEach(element =>{
+    switch (mode){ // Plot a specific geometrical figure according to the desired mode
+      case "marker":
+        element.forEach((innerElement) => {
+            L.marker([innerElement.coord_y, innerElement.coord_x]).addTo(mymap);
+          });
+        break;
+      case "polyline":
+        let coordinatesArray = [];
+        element.forEach(innerElement => coordinatesArray.push([innerElement.coord_y,innerElement.coord_x]));
+        L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
+        break;
+    }
+  })
+
+  // data.forEach(element => {
+  //   switch (mode){ // Plot a specific geometrical figure according to the desired mode
+  //     case "marker":
+  //         data.forEach((element) => {
+  //           L.marker([element.coord_y, element.coord_x]).addTo(mymap);
+  //         });
+  //       break;
+  //     case "polyline":
+  //       let coordinatesArray = [];
+  //       data.forEach(innerElement => coordinatesArray.push([innerElement.coord_y,innerElement.coord_x]));
+  //       L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
+  //       break;
+  //   }
+  // })
 }

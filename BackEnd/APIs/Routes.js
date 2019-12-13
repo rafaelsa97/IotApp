@@ -1,5 +1,4 @@
 const path         = require('path');
-const Towers       = require('../Models/TowersModel');
 const TowersController = require('../Controller/TowersController');
 
 module.exports = function loadRoutes(app, viewPath) {
@@ -13,7 +12,7 @@ module.exports = function loadRoutes(app, viewPath) {
 
     app.get("/Towers", function (req, res) {
         try{
-            TowersController.getAllTowers()
+            TowersController.getAllTowersPositions()
             .then(result => {
                 res.send(JSON.stringify(result));
             });

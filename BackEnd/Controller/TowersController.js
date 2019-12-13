@@ -1,4 +1,5 @@
 const TowersModel = require('../Models/TowersModel');
+const _ = require('underscore');
 
 class TowersController {
     /**
@@ -8,17 +9,20 @@ class TowersController {
      * TODO Cache information for faster calls
      * TODO Organize arrays by network name
      */
-    static getAllTowers() {
+    static getAllTowersPositions() {
         return new Promise((resolve,reject) => {
             TowersModel.findAll().then(response => {
-                resolve(response);
+                var groupedTowers = _.groupBy(response,'ds_linha_transmissao');
+                resolve(groupedTowers);
             }).catch((err) =>{
                 reject("Couldn't retrieve Lines data from database.\n" + err);
             });
         });
     }
 
-    
+    static divideByLineName(towers){
+
+    }
 }
 
 module.exports = TowersController;
