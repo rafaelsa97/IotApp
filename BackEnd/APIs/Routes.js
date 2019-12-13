@@ -1,8 +1,6 @@
 const path         = require('path');
-const request      = require('request')
-const Lines        = require('../Models/LinesModel');
 const Towers       = require('../Models/TowersModel');
-const envVariables = require('../../Config/EnvironmentVariables');
+const TowersController = require('../Controller/TowersController');
 
 module.exports = function loadRoutes(app, viewPath) {
     /**
@@ -13,19 +11,11 @@ module.exports = function loadRoutes(app, viewPath) {
         res.sendFile(path.join(viewPath + 'index.html')); // Send index page to browser
     });
 
-    /**
-     * * Towers API
-     * Loads all towers positioned in transmission lines
-     * ! Data persisted on "torres" database table.
-     * TODO Cache information for faster calls
-     * TODO Organize arrays by network name
-     */
     app.get("/Towers", function (req, res) {
         try{
-            Towers.findAll().then(response => {
-                res.send(JSON.stringify(response))
-            }).catch((err) =>{
-                reject("Couldn't retrieve Lines data from database.\n" + err);
+            TowersController.getAllTowers()
+            .then(result => {
+                res.send(JSON.stringify(result));
             });
         }
         catch(err){
