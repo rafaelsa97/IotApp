@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const db        = require('../Controller/databaseConnection');
+const db        = require('../Controller/DatabaseConnection');
 
 /**
  * * Electric Discharge database object

@@ -1,3 +1,6 @@
+const TowersController = require('./TowersController');
+const LinesController = require('./LinesController');
+
 class ModelTrainingRoutine {
     /**
      * * runModelraining(time)
@@ -6,10 +9,20 @@ class ModelTrainingRoutine {
      */
 
     static runModelTraining(minutes) {
-        var period = minutes * 60 * 1000;
+        var period = minutes * 60 * 1000; // Get the miliseconds equivalent value
         setInterval(function() {
-            console.log("I am doing my 5 minutes check");
-            // do your stuff here
+            var currentDate = new Date();
+            console.log("Starting model training at " + currentDate.toString());
+            
+            try{
+                // Get towers and lines information asynchronously
+
+                // let [towers, lines] = await Promise.all([TowersController.getSelectedTowersInfo(), LinesController.getSelectedLinesInfo()]);
+            }
+            catch(err){
+                console.log(err);
+            }
+
         }, period);
     }
 }
