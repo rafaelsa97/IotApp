@@ -1,4 +1,5 @@
-const TowersModel = require('../Models/TowersModel');
+const TowersBasicModel = require('../Models/TowersModel');
+const TowersCompleteModel = require('../Models/TowersCompleteModel');
 const _ = require('underscore');
 
 class TowersController {
@@ -11,7 +12,9 @@ class TowersController {
      */
     static getAllTowersPositions() {
         return new Promise((resolve,reject) => {
-            TowersModel.findAll().then(response => {
+            TowersCompleteModel.findAll({
+                attributes: ['ds_linha_transmissao', 'coord_x', 'coord_y']
+            }).then(response => {
                 var groupedTowers = _.groupBy(response,'ds_linha_transmissao');
                 resolve(groupedTowers);
             }).catch((err) =>{
@@ -20,7 +23,7 @@ class TowersController {
         });
     }
 
-    static divideByLineName(towers){
+    static getAllTowersInfo(){
 
     }
 }

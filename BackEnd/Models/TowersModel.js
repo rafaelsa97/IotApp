@@ -33,7 +33,5 @@ const Towers = db.define('torres', {
     }
 });
 
-Towers.schema("pfc");
-
 db.sync(); // Sync the model to the real database table
 module.exports = Towers;

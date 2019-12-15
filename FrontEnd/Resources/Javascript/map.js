@@ -38,24 +38,10 @@ function plotMarker(data,mode){
         break;
       case "polyline":
         let coordinatesArray = [];
-        element.forEach(innerElement => coordinatesArray.push([innerElement.coord_y,innerElement.coord_x]));
-        L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
+        // Insert on coordinatesArray only if coordinates are not null:
+        element.forEach( innerElement => (innerElement.coord_y && innerElement.coord_x) != null ? coordinatesArray.push([innerElement.coord_y,innerElement.coord_x]) : null );
+        L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap); // Plots all coordinates on the map as a continuous line
         break;
     }
   })
-
-  // data.forEach(element => {
-  //   switch (mode){ // Plot a specific geometrical figure according to the desired mode
-  //     case "marker":
-  //         data.forEach((element) => {
-  //           L.marker([element.coord_y, element.coord_x]).addTo(mymap);
-  //         });
-  //       break;
-  //     case "polyline":
-  //       let coordinatesArray = [];
-  //       data.forEach(innerElement => coordinatesArray.push([innerElement.coord_y,innerElement.coord_x]));
-  //       L.polyline(coordinatesArray, {color: 'red'}).addTo(mymap);
-  //       break;
-  //   }
-  // })
 }
