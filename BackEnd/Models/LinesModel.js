@@ -7,50 +7,43 @@ const db        = require('../Controller/databaseConnection');
  */
 const Lines = db.define('linhas', {
     // attributes
-    ID: {
+    id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
-        unique: true
+        primaryKey: true
     },
-    DATA_CRIACAO: {
-        type: Sequelize.DATE
+    id_ons: {
+        type: Sequelize.TEXT
     },
-    DATA_ATUALIZACAO: {
-        type: Sequelize.DATE
+    sg_concessao: {
+        type: Sequelize.TEXT
     },
-    LATITUDE: {
-        type: Sequelize.DOUBLE
+    ds_linha_transmissao: {
+        type: Sequelize.TEXT
     },
-    LONGITUDE: {
-        type: Sequelize.DOUBLE
-    },
-    ID_CLIENTE: {
+    comprimento: {
         type: Sequelize.INTEGER
     },
-    ID_ICONE: {
+    vl_classe_tensao: {
         type: Sequelize.INTEGER
     },
-    NM_LINHA: {
-        type: Sequelize.STRING
-    },
-    CD_COR_LINHA: {
-        type: Sequelize.STRING
-    },
-    VL_TENSAO: {
+    vl_tensao_nominal: {
         type: Sequelize.INTEGER
     },
-    VL_PRIORIDADE: {
+    vl_corrente_longa_duracao: {
         type: Sequelize.INTEGER
     },
-    ID_REGIONAL: {
+    vl_corrente_curta_duracao: {
         type: Sequelize.INTEGER
     },
-    ID_CONCESSAO: {
+    vl_potencia: {
         type: Sequelize.INTEGER
     },
-    ID_TIPO_ATIVO: {
-        type: Sequelize.DOUBLE
+    dt_operacao: {
+        type: Sequelize.BIGINT
+    },
+    in_prioridade: {
+        type: Sequelize.INTEGER
     }
 });
 
