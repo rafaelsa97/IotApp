@@ -56,8 +56,7 @@ class TowersController {
                                 'vl_vao_peso_pararaios'
                             ]
             }).then(response => {
-                var groupedTowers = _.groupBy(response,'ds_linha_transmissao');
-                resolve(groupedTowers);
+                resolve(response);
             }).catch((err) =>{
                 reject("Couldn't retrieve Lines data from database.\n" + err);
             });
