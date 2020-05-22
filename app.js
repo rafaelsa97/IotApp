@@ -15,3 +15,5 @@ modelTraining.runModelTraining(0.025); // Runs model training every N minutes
 app.listen(environmentalVariables.default.port,function(){
     console.log("Listening on port " + environmentalVariables.default.port);
 });
+
+// test
