@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const mysql = new Sequelize(envVariables.default.database.databaseName, envVariables.default.database.user, envVariables.default.database.password,
     {
-        host: "localhost",
+        host: envVariables.default.database.databaseHost,
         dialect: "postgres"
     },
     {
