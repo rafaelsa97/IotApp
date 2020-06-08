@@ -1,13 +1,12 @@
 var mymap = L.map('mapid').setView([-14.2350044, -51.9252815], 5); // Starts the map pointing to Brazil
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
     minZoom: 3,
     maxZoom: 20,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoicmFmYWVsc2E5NyIsImEiOiJjazJkejczamEwNDQyM2huMGN1cWR5bjFpIn0.bU27maqiKHbo6fEm_eor2g'
 }).addTo(mymap);
-
 
 /**
  * * loadAssetPoints()
@@ -17,7 +16,11 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
 function loadAssetPoints(){
   fetch("Towers") // Make an API call to get Discharges information
   .then(res => res.json())
-  .then(data => plotMarker(data,"polyline"))
+  .then(data => {
+    data = Object.values(data);
+    // plotMarker(data,"polyline");
+    plotTowerRadius(data);
+  })
   .catch(err => console.log(err));
 }
 
@@ -28,7 +31,7 @@ function loadAssetPoints(){
  * @param mode: select the plot mode (polyline or marker)
 */
 function plotMarker(data,mode){
-  data = Object.values(data);
+  debugger;
   data.forEach(element =>{
     switch (mode){ // Plot a specific geometrical figure according to the desired mode
       case "marker":
@@ -44,4 +47,25 @@ function plotMarker(data,mode){
         break;
     }
   })
+}
+
+/**
+ * * plotTowerRadius(object data, string mode)
+ * * Plot tower radius within 50 meters
+ * @param lines: lines whose towers will have their radius ploted
+*/
+function plotTowerRadius(lines){
+  debugger;
+  lines.forEach((towers) => {
+    towers.forEach((tower) => {
+      if(tower.coord_y && tower.coord_x){ // Plot only if coordinates are not null
+        L.circle([tower.coord_y, tower.coord_x], {
+          color: 'blue',
+          fillColor: '#f03',
+          fillOpacity: 0.5,
+          radius: 50
+        }).addTo(mymap)
+      }
+    })
+  });
 }

@@ -1,4 +1,4 @@
-const path         = require('path');
+const path             = require('path');
 const TowersController = require('../Controller/TowersController');
 
 module.exports = function loadRoutes(app, viewPath) {
@@ -10,6 +10,9 @@ module.exports = function loadRoutes(app, viewPath) {
         res.sendFile(path.join(viewPath + 'index.html')); // Send index page to browser
     });
 
+    /**
+     * This endpoint returns all towers information
+     */
     app.get("/Towers", function (req, res) {
         try{
             TowersController.getAllTowersPositions()

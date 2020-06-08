@@ -6,7 +6,7 @@ class TowersController {
     /**
      * * getAllTowers()
      * Loads all towers positioned in transmission lines
-     * ! Data persisted on "torres_completas" database table.
+     * ! Data persisted in "torres_completas" database table.
      * TODO Cache information for faster calls
      */
     static getAllTowersPositions() {
@@ -14,7 +14,7 @@ class TowersController {
             TowersCompleteModel.findAll({
                 attributes: ['ds_linha_transmissao', 'coord_x', 'coord_y']
             }).then(response => {
-                var groupedTowers = _.groupBy(response,'ds_linha_transmissao');
+                var groupedTowers = _.groupBy(response,'ds_linha_transmissao'); // Group all towers by line code
                 resolve(groupedTowers);
             }).catch((err) =>{
                 reject("Couldn't retrieve Towers data from database.\n" + err);
@@ -25,7 +25,7 @@ class TowersController {
     /**
      * * getSelectedTowersInfo()
      * Loads all towers information to model training algorithm
-     * ! Data persisted on "torres_completas" database table.
+     * ! Data persisted in "torres_completas" database table.
      */
     static getSelectedTowersInfo(){
         return new Promise((resolve,reject) => {

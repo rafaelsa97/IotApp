@@ -3,12 +3,12 @@ const linesController  = require('./LinesController');
 const Enumerable       = require('linq-es2015');
 
 class ModelTrainingRoutine {
+    
     /**
      * * runModelTraining(time)
      * Gets needed data and train the model every "time" minutes
      * @param minutes: time in minutes in which the function will be executed
      */
-
     static runModelTraining(minutes) {
         let period = minutes * 60 * 1000; // Get the miliseconds equivalent value
         setInterval(async function() {
@@ -60,6 +60,7 @@ class ModelTrainingRoutine {
             catch(err){
                 console.log(err);
             }
+            console.log("Finishing model training at " + currentDate.toString());
         }, period);
     }
 }
