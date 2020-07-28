@@ -55,7 +55,6 @@ class ModelTrainingRoutine {
                         }
                     }
                 ).ToArray();
-                
             }
             catch(err){
                 console.log(err);
