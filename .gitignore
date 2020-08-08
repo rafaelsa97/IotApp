@@ -64,3 +64,4 @@ typings/
 desktop.ini
 .vscode/launch.json
 /Testbench/*
+pfc.pem
