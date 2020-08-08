@@ -7,6 +7,7 @@ const mysql = new Sequelize(envVariables.default.database.databaseName, envVaria
         host: envVariables.default.database.databaseHost,
         dialect: "postgres"
     },
+    
     {
         pool: {
             max: 5,
