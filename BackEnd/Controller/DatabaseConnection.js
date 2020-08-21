@@ -2,7 +2,7 @@ const envVariables = require('../../Config/EnvironmentVariables.js');
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
-const mysql = new Sequelize(envVariables.default.database.databaseName, envVariables.default.database.user, envVariables.default.database.password,
+const postgres = new Sequelize(envVariables.default.database.databaseName, envVariables.default.database.user, envVariables.default.database.password,
     {
         host: envVariables.default.database.databaseHost,
         dialect: "postgres"
@@ -18,10 +18,10 @@ const mysql = new Sequelize(envVariables.default.database.databaseName, envVaria
     }
 );
 
-mysql.authenticate().then(() => {
+postgres.authenticate().then(() => {
     console.log("Database connected successfuly!");
 }).catch((err) => {
     console.log("Error on database connection.\n" + err);
 });
 
-module.exports = mysql;
+module.exports = postgres;
