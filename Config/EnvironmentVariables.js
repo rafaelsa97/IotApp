@@ -8,6 +8,7 @@ exports.default = {
         databaseName: process.env.DATABASE_NAME,
         databaseHost: process.env.DATABASE_HOST,
         user        : process.env.DATABASE_USER,
-        password    : process.env.DATABASE_PASSWORD
+        password    : process.env.DATABASE_PASSWORD,
+        port        : process.env.DATABASE_PORT
     }
 };
