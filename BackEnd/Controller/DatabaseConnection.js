@@ -7,9 +7,7 @@ const postgres = new Sequelize(envVariables.default.database.databaseName, envVa
         host: envVariables.default.database.databaseHost,
         port: envVariables.default.database.port,
         dialect: "postgres",
-        dialectOptions: {
-            ssl:'Amazon RDS'
-        }
+        ssl:'Amazon RDS'
     },
     
     {
