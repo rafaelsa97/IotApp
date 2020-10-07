@@ -67,3 +67,5 @@ typings/
 desktop.ini
 .vscode/launch.json
 /Testbench/*
+Monografia/
+.DS_Store

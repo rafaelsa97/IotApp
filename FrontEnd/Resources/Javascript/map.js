@@ -31,7 +31,6 @@ function loadAssetPoints(){
  * @param mode: select the plot mode (polyline or marker)
 */
 function plotMarker(data,mode){
-  debugger;
   data.forEach(element =>{
     switch (mode){ // Plot a specific geometrical figure according to the desired mode
       case "marker":
@@ -55,7 +54,6 @@ function plotMarker(data,mode){
  * @param lines: lines whose towers will have their radius ploted
 */
 function plotTowerRadius(lines){
-  debugger;
   lines.forEach((towers) => {
     towers.forEach((tower) => {
       if(tower.coord_y && tower.coord_x){ // Plot only if coordinates are not null
