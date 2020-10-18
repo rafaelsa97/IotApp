@@ -1,5 +1,6 @@
-const path             = require('path');
-const TowersController = require('../Controller/TowersController');
+const path              = require('path');
+const TowersController  = require('../Controller/TowersController');
+const ResultsController = require('../Controller/ResultsController');
 
 module.exports = function loadRoutes(app, viewPath) {
     /**
@@ -16,6 +17,21 @@ module.exports = function loadRoutes(app, viewPath) {
     app.get("/Towers", function (req, res) {
         try{
             TowersController.getAllTowersPositions()
+            .then(result => {
+                res.send(JSON.stringify(result));
+            });
+        }
+        catch(err){
+            console.log(err);
+        }
+    });
+
+    /**
+     * This endpoint returns all results information
+     */
+    app.get("/Results", function (req, res) {
+        try{
+            ResultsController.getAllResultsInfo()
             .then(result => {
                 res.send(JSON.stringify(result));
             });

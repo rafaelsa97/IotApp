@@ -19,6 +19,7 @@
   "homepage": "https://github.com/rafaelsa97/IotApp#readme",
   "dependencies": {
     "bootstrap": "^4.5.2",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "ejs": "^2.7.4",
     "express": "^4.17.1",
