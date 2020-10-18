@@ -1,4 +1,6 @@
-var mymap = L.map('mapid').setView([-14.2350044, -51.9252815], 5); // Starts the map pointing to Brazil
+var mymap = L.map('mapid',{
+  preferCanvas: true
+}).setView([-14.2350044, -51.9252815], 5); // Starts the map pointing to Brazil
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={accessToken}', {
     //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
