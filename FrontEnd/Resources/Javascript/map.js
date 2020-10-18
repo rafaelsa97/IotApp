@@ -1,6 +1,6 @@
 var mymap = L.map('mapid',{
   preferCanvas: true
-}).setView([-14.2350044, -51.9252815], 5); // Starts the map pointing to Brazil
+}).setView([-14.2350044, -51.9252815], 4); // Starts the map pointing to Brazil
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={accessToken}', {
     //attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -16,12 +16,20 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={ac
  *  ! This function is executed during page load
 */
 function loadAssetPoints(){
-  fetch("Towers") // Make an API call to get Discharges information
+  fetch("http://pfcwebserver-env.eba-2ebev37k.sa-east-1.elasticbeanstalk.com/towers") // Make an API call to get Discharges information
   .then(res => res.json())
   .then(data => {
     data = Object.values(data);
     // plotMarker(data,"polyline");
     plotTowerRadius(data);
+  })
+  .catch(err => console.log(err));
+
+  fetch("http://pfcwebserver-env.eba-2ebev37k.sa-east-1.elasticbeanstalk.com/results") // Make an API call to get Discharges information
+  .then(res => res.json())
+  .then(data => {
+    data = Object.values(data);
+    plotResults(data);
   })
   .catch(err => console.log(err));
 }
@@ -69,3 +77,29 @@ function plotTowerRadius(lines){
     })
   });
 }
+
+var greenIcon = new L.Icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
+  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
+
+/**
+ * * plotResults(object data, string mode)
+ * * Plot discharge position
+ * @param results: results whose coordinates will be ploted
+*/
+function plotResults(results){
+  results.forEach((discharge) => {
+    if(discharge.latitude && discharge.longitude){ // Plot only if coordinates are not null
+      L.marker([discharge.latitude, discharge.longitude],{icon: greenIcon}).addTo(mymap)
+      .bindPopup('Torre afetada: '+discharge.towerindex.toString()+'<br>'+
+                 'Horário: '+discharge.date.toString()+'<br>'+
+                 'Distância da torre: '+parseFloat(discharge.distance).toFixed(2).toString()+' metros<br>')
+      .openPopup();
+    }
+  })
+};
