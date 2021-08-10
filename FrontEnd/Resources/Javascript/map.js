@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?access_token={ac
     minZoom: 3,
     maxZoom: 20,
     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoicmFmYWVsc2E5NyIsImEiOiJja2ZuZXY5MjkxcTNwMnFsM3l0NzlmZGQxIn0.BkgVYx-rYyQ_cUGfLDHxQQ'
+    accessToken: 'ACCESS_TOKEN'
 }).addTo(mymap);
 
 /**
